@@ -1,8 +1,12 @@
-<div>
-
+<div class="flex d-flex overflow-hidden">
   <app-header></app-header>
-
-  <div>
-    <router-outlet></router-outlet>
+  <!--Main content area-->
+  <div class="overflow-y-auto h-screen w-screen dark:text-gray-400 dark:bg-gray-900">
+    <!--Margin div-->
+    <div class="p-8 mb-10">
+      <!--Router Outlet-->
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
   </div>
 </div>
