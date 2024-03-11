@@ -3,6 +3,8 @@ import { HomeComponent } from "./feats/home/home.component";
 import { PagenotfoundComponent } from "./feats/errors/pagenotfound/pagenotfound.component";
 import { DashboardComponent } from "./feats/admin/dashboard/dashboard.component";
 import { SettingsComponent } from "./feats/admin/settings/settings.component";
+import { AuthGuardService } from "./shared/core/auth/guards/auth.guard.service";
+import {NotauthorizedComponent} from "./feats/errors/notauthorized/notauthorized.component";
 
 export const routes: Routes = [
   {
@@ -11,6 +13,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivateChild: [AuthGuardService],
     children: [
       {
         path: 'dashboard',
@@ -21,6 +24,10 @@ export const routes: Routes = [
         component: SettingsComponent
       }
     ]
+  },
+  {
+    path: 'not-authorized',
+    component: NotauthorizedComponent
   },
   {
     path: '**',

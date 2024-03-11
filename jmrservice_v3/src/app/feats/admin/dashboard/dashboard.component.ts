@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import {UsrCountComponent} from "./charts/usr-count/usr-count.component";
+import { UsrCountComponent } from "./charts/usr-count/usr-count.component";
+import {ChartsComponent} from "./charts/charts.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    UsrCountComponent
+    ChartsComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
