@@ -9,6 +9,13 @@ import { DashboardComponent} from "../../../../feats/admin/dashboard/dashboard.c
 export class AuthGuardService implements CanActivate, CanActivateChild,CanDeactivate<DashboardComponent>, CanLoad  {
   constructor(private authService: AuthService, private router: Router) {}
 
+  canShow():boolean{
+    if(this.authService.isAuthenticatedUser()){
+      return true;
+    }
+    return false;
+  }
+
   canActivate(): boolean {
     return this.checkAuth();
   }

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { MatIcon } from "@angular/material/icon";
 import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from "@angular/router";
+import {AuthGuardService} from "../../core/auth/guards/auth.guard.service";
 
 
 @Component({
@@ -16,7 +17,7 @@ import {RouterLink} from "@angular/router";
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   isAdmin: boolean = false;
 
@@ -30,6 +31,16 @@ export class HeaderComponent {
     settings: false,
     admin_dashboard: false
   };
+
+  constructor(
+    private authGuard: AuthGuardService
+  ) {
+  }
+
+  ngOnInit() {
+    this.isAdmin = this.authGuard.canShow();
+    this.isLoggedIn = this.authGuard.canShow();
+  }
 
   public setRouteActive(route: string): void {
     this.activatedRoute = {
