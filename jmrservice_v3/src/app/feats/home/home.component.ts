@@ -3,6 +3,7 @@ import {GoToAdminBtnComponent} from "./go-to-admin-btn/go-to-admin-btn.component
 import {CommonModule} from "@angular/common";
 import {AuthGuardService} from "../../shared/core/auth/guards/auth.guard.service";
 import {MatIcon} from "@angular/material/icon";
+import {ToastrComponent} from "../../shared/components/feedback/toastr/toastr.component";
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,8 @@ import {MatIcon} from "@angular/material/icon";
   imports: [
     CommonModule,
     GoToAdminBtnComponent,
-    MatIcon
+    MatIcon,
+    ToastrComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
