@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {MatIcon} from "@angular/material/icon";
 import {CommonModule} from "@angular/common";
+import {AuthGuardService} from "../../core/auth/guards/auth.guard.service";
+import {OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -14,6 +16,14 @@ import {CommonModule} from "@angular/common";
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit{
   isLoggedIn: boolean = false;
+
+  constructor(
+    private authGuard: AuthGuardService
+  ) { }
+
+  ngOnInit() {
+    this.isLoggedIn = this.authGuard.canShowToUser();
+  }
 }

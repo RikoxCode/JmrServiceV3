@@ -29,7 +29,8 @@ export class HeaderComponent implements OnInit {
     accounts: false,
     tickets: false,
     settings: false,
-    admin_dashboard: false
+    admin_dashboard: false,
+    archive: false
   };
 
   constructor(
@@ -38,18 +39,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isAdmin = this.authGuard.canShow();
-    this.isLoggedIn = this.authGuard.canShow();
+    this.isAdmin = this.authGuard.canShowToAdmin();
+    this.isLoggedIn = this.authGuard.canShowToUser();
   }
 
   public setRouteActive(route: string): void {
-    this.activatedRoute = {
-      dashboard: false,
-      accounts: false,
-      tickets: false,
-      settings: false,
-      admin_dashboard: false
-    };
+    for (let key in this.activatedRoute) {
+      this.activatedRoute[key] = false;
+    }
 
     this.activatedRoute[route] = true;
   }

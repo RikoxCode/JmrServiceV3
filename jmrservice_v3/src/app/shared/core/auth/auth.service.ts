@@ -8,6 +8,7 @@ export class AuthService {
 
   private isAuthenticated = false;
   private authSecretKey = 'Bearer Token';
+  private permisionLevel = 0;
 
   constructor() {
     this.isAuthenticated = !!localStorage.getItem(this.authSecretKey);
@@ -25,7 +26,11 @@ export class AuthService {
   }
 
   isAuthenticatedUser(): boolean {
-    return false; //this.isAuthenticated;
+    return true; //this.isAuthenticated;
+  }
+
+  isAdminUser(): boolean {
+    return this.permisionLevel > 50;
   }
 
   logout(): void {

@@ -17,7 +17,7 @@ import {ToastrComponent} from "../../shared/components/feedback/toastr/toastr.co
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   isAdmin: boolean = false;
 
   constructor(
@@ -27,6 +27,6 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.isAdmin = this.authGuard.canShow()
+    this.isAdmin = this.authGuard.canShowToAdmin()
   }
 }
