@@ -11,7 +11,7 @@ export class LogsService {
 
   _(message: string, type: string = "normal"){
     if(this.isDevelopmentMode){
-      switch (type){
+      switch (type.toLowerCase()){
         case "error":
           console.error(message);
           break;
