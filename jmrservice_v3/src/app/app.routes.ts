@@ -8,6 +8,8 @@ import {NotauthorizedComponent} from "./feats/errors/notauthorized/notauthorized
 import {LoginComponent} from "./feats/auth/login/login.component";
 import {RegistrationComponent} from "./feats/auth/registration/registration.component";
 import {PasswordResetComponent} from "./feats/auth/password-reset/password-reset.component";
+import {TableComponent} from "./feats/archive/table/table.component";
+import {DemoComponent} from "./feats/archive/demo/demo.component";
 
 export const routes: Routes = [
   {
@@ -46,6 +48,20 @@ export const routes: Routes = [
       {
         path: '**',
         redirectTo: 'login'
+      }
+    ]
+  },
+  {
+    path: 'archive',
+    children: [
+      {
+        path: 'table',
+        canActivate: [AuthGuardService],
+        component: TableComponent
+      },
+      {
+        path: 'demo',
+        component: DemoComponent
       }
     ]
   },

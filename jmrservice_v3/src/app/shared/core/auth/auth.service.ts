@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   isAuthenticatedUser(): boolean {
-    return true; //this.isAuthenticated;
+    return false; //this.isAuthenticated;
   }
 
   isAdminUser(): boolean {

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArchiveComponent } from './archive.component';
+import { DatatableComponent } from './datatable.component';
 
-describe('ArchiveComponent', () => {
-  let component: ArchiveComponent;
-  let fixture: ComponentFixture<ArchiveComponent>;
+describe('DatatableComponent', () => {
+  let component: DatatableComponent;
+  let fixture: ComponentFixture<DatatableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ArchiveComponent]
+      imports: [DatatableComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ArchiveComponent);
+    fixture = TestBed.createComponent(DatatableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
