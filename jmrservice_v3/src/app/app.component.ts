@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterOutlet} from '@angular/router';
 import {HeaderComponent} from "./shared/components/header/header.component";
 import {MatIcon} from "@angular/material/icon";
 import {FooterComponent} from "./shared/components/footer/footer.component";
+import {ErrorResponseComponent} from "./shared/components/feedback/error-response/error-response.component";
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,12 @@ import {FooterComponent} from "./shared/components/footer/footer.component";
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    MatIcon
+    MatIcon,
+    ErrorResponseComponent,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers: []
 })
 export class AppComponent {
   title = 'jmrservice_v3';

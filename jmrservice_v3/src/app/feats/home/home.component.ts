@@ -22,11 +22,11 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private authGuard: AuthGuardService
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.isAdmin = this.authGuard.canShowToAdmin()
+
+    throw new Error("An error occurred while loading the home page.");
   }
 }

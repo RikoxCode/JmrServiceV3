@@ -9,7 +9,7 @@ export class LogsService {
 
   constructor() { }
 
-  _(message: string, type: string = "normal"){
+  _(message: any, type: string = "normal"){
     if(this.isDevelopmentMode){
       switch (type){
         case "error":
@@ -21,7 +21,7 @@ export class LogsService {
           break;
 
         case "note":
-          console.log(`%c ${message}`, 'color: grey; text-decoration: underline;');
+          console.log(`%c${message}`, 'color: grey;');
           break;
 
         default:
