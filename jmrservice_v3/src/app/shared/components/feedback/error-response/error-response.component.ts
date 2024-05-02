@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, effect, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RoutingService} from "../../../core/http/routing.service";
 import {AppComponent} from "../../../../app.component";
 import {RouterLink} from "@angular/router";
+import {GlobalErrorHandlingService} from "../../../core/handling/global-error-handling.service";
 
 @Component({
   selector: 'app-error-response',
@@ -13,47 +14,32 @@ import {RouterLink} from "@angular/router";
   styleUrl: './error-response.component.scss',
   providers: [RoutingService]
 })
-export class ErrorResponseComponent {
-  @Input() private title: string = "Error"
-  @Input() private message: string = "An error occurred. Please try again later.";
-  @Input() private stackTrace: string = "";
+export class ErrorResponseComponent implements OnInit{
+  @Input() public title: string = "Error";
+  @Input() public message: string = "An error occurred. Please try again later.";
+  @Input() public stackTrace: string = "";
   public hasError: boolean = false;
 
-  public routingService: RoutingService = new RoutingService();
+  constructor(
+      private globalErrorHandlerService: GlobalErrorHandlingService,
+      private routingService: RoutingService
+  ) {
+    effect(() => {
+      this.hasError = this.globalErrorHandlerService.errorValue();
+      console.log("Error found: " + this.hasError)
+    });
+  }
+
+  ngOnInit() {
+
+  }
 
   public navigateBack(): void {
     this.routingService.goBack();
-    this.hideError();
+    this.hideModal();
   }
 
-  public showError(): void {
-    this.hasError = true;
-    console.error("Error Modal = true");
-  }
-
-  public hideError(): void {
-    this.hasError = false;
-  }
-
-  public getParams(): any {
-    return {
-      title: this.title,
-      message: this.message,
-      stackTrace: this.stackTrace
-    }
-  }
-
-  public setErrorTitle(title: string) {
-      this.title = title;
-  }
-
-  public setErrorMessage(message: string) {
-      this.message = message;
-  }
-
-  public setParams(title: string, message: string, stackTrace: string) {
-      this.title = title;
-      this.message = message;
-      this.stackTrace = stackTrace;
+  hideModal(): void {
+    this.globalErrorHandlerService.setErrorValue(false);
   }
 }

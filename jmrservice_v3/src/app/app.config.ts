@@ -8,7 +8,8 @@ import {ErrorResponseComponent} from "./shared/components/feedback/error-respons
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
+        {provide: ErrorHandler, useClass: GlobalErrorHandlingService},
         ErrorResponseComponent,
-        {provide: ErrorHandler, useClass: GlobalErrorHandlingService}
+        GlobalErrorHandlingService
     ]
 };

@@ -6,41 +6,47 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {ErrorResponseComponent} from "../../../shared/components/feedback/error-response/error-response.component";
+import {HTTPError} from "../../../shared/core/error-types/httperror";
+import {
+    AnimatedBackgroundComponent
+} from "../../../shared/components/background/animated-background/animated-background.component";
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    RouterLink,
-    HttpClientModule,
-    FormsModule,
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
-  providers: [LogsService, HttpClient, RequesterService]
+    selector: 'app-login',
+    standalone: true,
+    imports: [
+        RouterLink,
+        HttpClientModule,
+        FormsModule,
+        AnimatedBackgroundComponent
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss',
+    providers: [LogsService, HttpClient, RequesterService]
 })
 export class LoginComponent {
-  constructor(
-    private logger: LogsService,
-    private requester: RequesterService
-  ) { }
-
-  public async login(event: Event) {
-    event.preventDefault();
-
-    this.logger.isDevelopmentMode = true;
-    this.logger._("Logging in...", "note");
-
-    const email = (document.getElementById('email') as HTMLInputElement).value;
-    const password = (document.getElementById('password') as HTMLInputElement).value;
-
-    const response = await this.requester.POST(environment.apis.authAPI + '/login', {email, password});
-
-    if (response.status !== 200) {
-      throw new Error("Invalid credentials");
+    constructor(
+        private logger: LogsService,
+        private requester: RequesterService
+    ) {
     }
 
-    this.logger._(response, "");
-  }
+    public async login(event: Event) {
+        event.preventDefault();
+
+        this.logger.isDevelopmentMode = true;
+        this.logger._("Logging in...", "note");
+
+        const email = (document.getElementById('email') as HTMLInputElement).value;
+        const password = (document.getElementById('password') as HTMLInputElement).value;
+
+        const response = await this.requester.POST(environment.apis.authAPI + '/login', {email, password});
+
+        if (response.status !== 200) {
+            throw new HTTPError("Invalid credentials", response.status);
+        }
+
+        this.logger._(response, "");
+    }
 
 }
