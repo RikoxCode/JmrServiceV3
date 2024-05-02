@@ -16,6 +16,7 @@ import {RouterLink} from "@angular/router";
 export class ErrorResponseComponent {
   @Input() private title: string = "Error"
   @Input() private message: string = "An error occurred. Please try again later.";
+  @Input() private stackTrace: string = "";
   public hasError: boolean = false;
 
   public routingService: RoutingService = new RoutingService();
@@ -27,18 +28,19 @@ export class ErrorResponseComponent {
 
   public showError(): void {
     this.hasError = true;
+    console.error("Error Modal = true");
   }
 
   public hideError(): void {
     this.hasError = false;
   }
 
-  public getErrorTitle(): string {
-    return this.title;
-  }
-
-  public getErrorMessage(): string {
-    return this.message;
+  public getParams(): any {
+    return {
+      title: this.title,
+      message: this.message,
+      stackTrace: this.stackTrace
+    }
   }
 
   public setErrorTitle(title: string) {
@@ -47,5 +49,11 @@ export class ErrorResponseComponent {
 
   public setErrorMessage(message: string) {
       this.message = message;
+  }
+
+  public setParams(title: string, message: string, stackTrace: string) {
+      this.title = title;
+      this.message = message;
+      this.stackTrace = stackTrace;
   }
 }

@@ -1,12 +1,25 @@
-import {ErrorHandler, Injectable} from '@angular/core';
+import {Component, ErrorHandler, Injectable} from '@angular/core';
 import {ErrorResponseComponent} from "../../components/feedback/error-response/error-response.component";
 
-@Injectable({
-  providedIn: 'root',
+@Component({
+    selector: 'app-global-error-handling',
+    standalone: true,
+    imports: [
+        ErrorResponseComponent
+    ],
+    template: '',
+    providers: [ErrorResponseComponent]
 })
 export class GlobalErrorHandlingService implements ErrorHandler {
-  private errorHandler: ErrorResponseComponent = new ErrorResponseComponent();
-  handleError(error: any): void {
-    this.errorHandler.showError();
-  }
+
+    constructor(
+        private errorHandler: ErrorResponseComponent
+    ) {
+    }
+
+    handleError(error: any): void {
+        this.errorHandler.setParams(error.type, error.message, error.stackTrace)
+        this.errorHandler.showError();
+        console.log(error.type, error.message, error.stackTrace);
+    }
 }

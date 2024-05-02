@@ -25,8 +25,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.isAdmin = this.authGuard.canShowToAdmin()
-
-    throw new Error("An error occurred while loading the home page.");
+    this.isAdmin = this.authGuard.canShowToAdmin();
   }
 }

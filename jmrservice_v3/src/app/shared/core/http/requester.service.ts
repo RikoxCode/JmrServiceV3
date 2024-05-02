@@ -18,18 +18,14 @@ export class RequesterService {
   constructor(
     private httpClient: HttpClient,
     private logService: LogsService,
-    private errorHandler: ErrorResponseComponent
   ) { }
 
   private ErrorHandler(method: Function) {
     try {
       return method();
     } catch (err: any) {
-      this.logService._(err.message, "error");
-      this.errorHandler.setErrorTitle("HTTP Error");
-      this.errorHandler.setErrorMessage(err.message);
-      this.errorHandler.showError();
-      return err;
+      this.logService._(err.message, "error")
+      throw new HttpErrorResponse(err.message)
     }
   }
 

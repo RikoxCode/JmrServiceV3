@@ -14,7 +14,6 @@ import {ErrorResponseComponent} from "../../../shared/components/feedback/error-
     RouterLink,
     HttpClientModule,
     FormsModule,
-    ErrorResponseComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
