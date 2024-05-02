@@ -1,19 +1,28 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, CanDeactivate, CanLoad, Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { DashboardComponent} from "../../../../feats/admin/dashboard/dashboard.component";
+import {Injectable} from '@angular/core';
+import {CanActivate, CanActivateChild, CanDeactivate, CanLoad, Router} from '@angular/router';
+import {AuthService} from '../auth.service';
+import {DashboardComponent} from "../../../../feats/admin/dashboard/dashboard.component";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate, CanActivateChild,CanDeactivate<DashboardComponent>, CanLoad  {
-  constructor(private authService: AuthService, private router: Router) {}
+export class AuthGuardService implements CanActivate, CanActivateChild, CanDeactivate<DashboardComponent>, CanLoad {
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
-  canShow():boolean{
-    if(this.authService.isAuthenticatedUser()){
+  canShowToUser(): boolean {
+    if (this.authService.isAuthenticatedUser()) {
       return true;
     }
     return false;
+  }
+
+  canShowToAdmin(): boolean {
+    if (this.authService.isAdminUser()) {
+      return true;
+    }
+    return false;
+
   }
 
   canActivate(): boolean {

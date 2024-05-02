@@ -1,53 +1,78 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { LogsService } from "../logs.service";
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpClientModule, HttpErrorResponse} from "@angular/common/http";
+import {LogsService} from "../log/log.service";
+import {ErrorResponseComponent} from "../../components/feedback/error-response/error-response.component";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequesterService {
 
-  private urlBase: string = "";
+  private headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  }
 
   constructor(
-      private httpClient: HttpClient,
-      private logService: LogsService
+    private httpClient: HttpClient,
+    private logService: LogsService,
+    private errorHandler: ErrorResponseComponent
   ) { }
 
-  public setUrl(url: string){
-    this.urlBase = url;
+  private ErrorHandler(method: Function) {
+    try {
+      return method();
+    } catch (err: any) {
+      this.logService._(err.message, "error");
+      this.errorHandler.setErrorTitle("HTTP Error");
+      this.errorHandler.setErrorMessage(err.message);
+      this.errorHandler.showError();
+      return err;
+    }
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    this.logService._("HTTP ERROR: " + error.message + " | " + error.url, "error");
-    return throwError(error);
+  public GET(url: string): any {
+    const request = this.ErrorHandler(() => {
+      return this.httpClient.request('GET', url, {responseType:'json'}).subscribe((data) => {
+        return data;
+      });
+    });
+
+    this.logService._(request, "note");
+
+    return request;
   }
 
-  private handleResponse<T>(observable: Observable<T>): Observable<T> {
-    return observable.pipe(
-        catchError((error: HttpErrorResponse) => this.handleError(error))
-    );
+  public POST(url: string, body: any): any {
+    const request = this.ErrorHandler(() => {
+      return this.httpClient.request('POST', url, {body: body, responseType: 'json', headers: this.headers}).subscribe((data) => {
+        return data;
+      });
+    });
+
+    return request;
   }
 
-  private makeRequest<T>(observable: Observable<T>): Observable<T> {
-    return this.handleResponse(observable);
+  public PUT(url: string, body: any): any {
+    const request = this.ErrorHandler(() => {
+      return this.httpClient.request('PUT', url, {body: body, responseType: 'json', headers: this.headers}).subscribe((data) => {
+        return data;
+      });
+    });
+
+    return request;
   }
 
-  public GET<T>(url: string): Observable<T> {
-    return this.makeRequest(this.httpClient.get<T>(url));
+  public DELETE(url: string): any {
+    const request = this.ErrorHandler(() => {
+      return this.httpClient.request('DELETE', url, {responseType: 'json', headers: this.headers}).subscribe((data) => {
+        return data;
+      });
+    });
+
+    return request;
   }
 
-  public POST<T>(url: string, body: any): Observable<T> {
-    return this.makeRequest(this.httpClient.post<T>(url, body));
-  }
-
-  public DELETE<T>(url: string): Observable<T> {
-    return this.makeRequest(this.httpClient.delete<T>(url));
-  }
-
-  public UPDATE<T>(url: string, body: any): Observable<T> {
-    return this.makeRequest(this.httpClient.put<T>(url, body));
-  }
 }
