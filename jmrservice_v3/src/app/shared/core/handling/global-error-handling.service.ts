@@ -1,5 +1,6 @@
 import {Component, effect, ErrorHandler, Injectable, signal, WritableSignal} from '@angular/core';
 import {ErrorResponseComponent} from "../../components/feedback/error-response/error-response.component";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
     selector: 'app-global-error-handling',
@@ -7,24 +8,28 @@ import {ErrorResponseComponent} from "../../components/feedback/error-response/e
     imports: [
         ErrorResponseComponent
     ],
-    template: '',
+    template: `
+        @if(errorValue){
+            <app-error-response [title]="errorData.name" [message]="errorData.message" [stackTrace]="errorData.stack" (hideModal)="setErrorValue(false)"></app-error-response>
+        }`,
     providers: []
 })
 export class GlobalErrorHandlingService implements ErrorHandler {
-    public errorValue: WritableSignal<boolean> = signal(false);
+    public errorValue = false;
     public errorData: any = null;
 
-    constructor() { }
+    constructor() {
+        console.log(this.errorValue);
+    }
 
     handleError(error: any): void {
-        console.log(this.errorValue());
-        this.errorValue.set(true);
-        console.log(this.errorValue());
+        console.log("GlobalErrorHandlingService.handleError", error);
         this.errorData = error;
+        this.setErrorValue(true);
         console.log(error.name, error.message, error.stack);
     }
 
     setErrorValue(value: boolean): void {
-        this.errorValue.set(value);
+        this.errorValue = value;
     }
 }

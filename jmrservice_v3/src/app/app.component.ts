@@ -10,14 +10,15 @@ import {GlobalErrorHandlingService} from "./shared/core/handling/global-error-ha
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    HeaderComponent,
-    FooterComponent,
-    MatIcon,
-    ErrorResponseComponent,
-  ],
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        HeaderComponent,
+        FooterComponent,
+        MatIcon,
+        ErrorResponseComponent,
+        GlobalErrorHandlingService,
+    ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: []

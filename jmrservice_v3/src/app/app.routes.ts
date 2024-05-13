@@ -10,11 +10,17 @@ import {RegistrationComponent} from "./feats/auth/registration/registration.comp
 import {PasswordResetComponent} from "./feats/auth/password-reset/password-reset.component";
 import {TableComponent} from "./feats/archive/table/table.component";
 import {DemoComponent} from "./feats/archive/demo/demo.component";
+import {ProfileComponent} from "./feats/auth/profile/profile.component";
 
 export const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'account',
+    component: ProfileComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'admin',
