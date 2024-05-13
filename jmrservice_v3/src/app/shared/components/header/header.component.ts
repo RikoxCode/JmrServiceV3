@@ -4,6 +4,8 @@ import { MatIcon } from "@angular/material/icon";
 import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from "@angular/router";
 import {AuthGuardService} from "../../core/auth/guards/auth.guard.service";
+import {AuthService} from "../../core/auth/auth.service";
+import {environment} from "../../../../environments/environment";
 
 
 @Component({
@@ -15,7 +17,8 @@ import {AuthGuardService} from "../../core/auth/guards/auth.guard.service";
     RouterLink
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
+  providers: [AuthGuardService]
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
@@ -34,7 +37,8 @@ export class HeaderComponent implements OnInit {
   };
 
   constructor(
-    private authGuard: AuthGuardService
+    private authGuard: AuthGuardService,
+    public auth: AuthService
   ) {
   }
 
@@ -51,4 +55,5 @@ export class HeaderComponent implements OnInit {
     this.activatedRoute[route] = true;
   }
 
+  protected readonly environment = environment;
 }

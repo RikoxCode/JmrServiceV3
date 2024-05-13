@@ -1,40 +1,46 @@
-import { Injectable } from '@angular/core';
+import {Component, Injectable} from '@angular/core';
+import {User} from "../interfaces/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+    private user: User | null = null;
 
-
-  private isAuthenticated = false;
-  private authSecretKey = 'Bearer Token';
-  private permisionLevel = 0;
-
-  constructor() {
-    this.isAuthenticated = !!localStorage.getItem(this.authSecretKey);
-  }
-
-  login(username: string, password: string): boolean {
-    if (username === 'Jaydeep Patil' && password === 'Pass@123') {
-      const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpheWRlZXAgUGF0aWwiLCJpYXQiOjE1MTYyMzkwMjJ9.yt3EOXf60R62Mef2oFpbFh2ihkP5qZ4fM8bjVnF8YhA'; // Generate or receive the token from your server
-      localStorage.setItem(this.authSecretKey, authToken);
-      this.isAuthenticated = true;
-      return true;
-    } else {
-      return false;
+    constructor() {
+      this.user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null;
     }
-  }
 
-  isAuthenticatedUser(): boolean {
-    return true; //this.isAuthenticated;
-  }
+    public setUser(token: string, user: any) {
+        this.user = user;
+        this.user!.token = token;
+        localStorage.setItem('user', JSON.stringify(this.user));
+        console.log(this.user);
+    }
 
-  isAdminUser(): boolean {
-    return true; //this.permisionLevel > 50;
-  }
+    public getUser(): User {
+        return this.user || {} as User;
+    }
 
-  logout(): void {
-    localStorage.removeItem(this.authSecretKey);
-    this.isAuthenticated = false;
-  }
+    public getToken(): string {
+        return this.user != null ? this.user!.token : "";
+    }
+
+    public isAuthenticatedUser(): boolean {
+        return this.user !== null;
+        //return true;
+    }
+
+    public isAdminUser(): boolean {
+        if(this.isAuthenticatedUser()) {
+            return this.user!.permissions_level >= 80 || this.user!.is_sys_admin;
+            //return true;
+        }
+        return false;
+    }
+
+    public logout() {
+        this.user = null;
+        localStorage.removeItem('user');
+    }
 }

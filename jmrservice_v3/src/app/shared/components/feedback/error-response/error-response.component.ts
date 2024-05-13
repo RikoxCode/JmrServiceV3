@@ -1,8 +1,6 @@
 import {Component, effect, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RoutingService} from "../../../core/http/routing.service";
-import {AppComponent} from "../../../../app.component";
 import {RouterLink} from "@angular/router";
-import {GlobalErrorHandlingService} from "../../../core/handling/global-error-handling.service";
 
 @Component({
   selector: 'app-error-response',
@@ -15,21 +13,32 @@ import {GlobalErrorHandlingService} from "../../../core/handling/global-error-ha
   providers: [RoutingService]
 })
 export class ErrorResponseComponent {
-  @Input() public title: string = "Error";
-  @Input() public message: string = "An error occurred. Please try again later.";
-  @Input() public stackTrace: string = "";
-  @Output() public hideModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public title: string = "Error";
+  public message: string = "An error occurred. Please try again later.";
+  public stackTrace: string = "";
+  public hasError: boolean = false;
 
   constructor(
       private routingService: RoutingService
-  ) { }
+  ) {
+    effect(() => {
+      console.log("Error found: " + this.hasError)
+    });
+  }
 
   public navigateBack(): void {
     this.routingService.goBack();
-    this.funcHideModal();
+    this.hideModal();
   }
 
-  funcHideModal(): void {
-    this.hideModal.emit(false);
+  public hideModal(): void {
+    this.hasError = false;
+  }
+
+  public show(error: Error): void {
+    this.title = error.name;
+    this.message = error.message;
+    this.stackTrace = error.stack || "No stack trace available.";
+    this.hasError = true;
   }
 }

@@ -1,52 +1,59 @@
 import {Component} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Router} from "@angular/router";
 import {RequesterService} from "../../../shared/core/http/requester.service";
 import {LogsService} from "../../../shared/core/log/log.service";
 import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import {ErrorResponseComponent} from "../../../shared/components/feedback/error-response/error-response.component";
+import {AuthService} from "../../../shared/core/auth/auth.service";
+import {ToastrService} from "ngx-toastr";
 import {HTTPError} from "../../../shared/core/error-types/httperror";
-import {
-    AnimatedBackgroundComponent
-} from "../../../shared/components/background/animated-background/animated-background.component";
 
 @Component({
-    selector: 'app-login',
-    standalone: true,
-    imports: [
-        RouterLink,
-        HttpClientModule,
-        FormsModule,
-        AnimatedBackgroundComponent
-    ],
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.scss',
-    providers: [LogsService, HttpClient, RequesterService]
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    HttpClientModule,
+    FormsModule,
+  ],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
+  providers: [LogsService, HttpClient, RequesterService]
 })
 export class LoginComponent {
-    constructor(
-        private logger: LogsService,
-        private requester: RequesterService
-    ) {
-    }
+  constructor(
+    private logger: LogsService,
+    private requester: RequesterService,
+    private auth: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
+  }
 
-    public async login(event: Event) {
-        event.preventDefault();
+  public async login(event: Event) {
+    event.preventDefault();
 
-        this.logger.isDevelopmentMode = true;
-        this.logger._("Logging in...", "note");
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+    const password = (document.getElementById('password') as HTMLInputElement).value;
 
-        const email = (document.getElementById('email') as HTMLInputElement).value;
-        const password = (document.getElementById('password') as HTMLInputElement).value;
+    await this.loginRequest(email, password);
+  }
 
-        const response = await this.requester.POST(environment.apis.authAPI + '/login', {email, password});
-
-        if (response.status !== 200) {
-            throw new HTTPError("Invalid credentials", response.status);
+  private async loginRequest(email: string, password: string) {
+      await this.requester.POST(environment.apis.authAPI + '/login', {
+        email,
+        password
+      }).subscribe((data: any = "") => {
+        this.auth.setUser(data.token, data.user);
+        this.toastr.success('Login successful', 'Login successful')
+        window.location.href = '/';
+      }, (err: any) => {
+        console.log(err)
+        if(err.status === 401){
+          this.toastr.error('Invalid credentials', 'Login failed')
+        } else {
+          this.toastr.error(err.error.message, 'Login failed')
         }
-
-        this.logger._(response, "");
-    }
-
+      });
+  }
 }

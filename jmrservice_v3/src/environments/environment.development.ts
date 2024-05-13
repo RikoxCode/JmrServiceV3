@@ -1,6 +1,7 @@
 export const environment = {
   apis: {
-    authAPI: 'https://alphaguard_alpha-version.test/auth',
-    srcAPI: 'http://alphaguard_alpha-version.test/src',
+    authAPI: 'http://alphaguard_alpha-version.test/api/v1/auth',
+    avatarAPI: 'http://alphaguard_alpha-version.test/api/v1/users/',
+    srcAPI: 'htt://alphaguard_alpha-version.test/src',
   }
-};;
+};

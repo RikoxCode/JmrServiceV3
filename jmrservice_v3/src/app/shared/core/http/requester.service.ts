@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpClientModule, HttpErrorResponse} from "@angular/common/http";
 import {LogsService} from "../log/log.service";
 import {ErrorResponseComponent} from "../../components/feedback/error-response/error-response.component";
+import {AuthService} from "../auth/auth.service";
 
 
 @Injectable({
@@ -9,66 +10,58 @@ import {ErrorResponseComponent} from "../../components/feedback/error-response/e
 })
 export class RequesterService {
 
-  private headers = {
+  private headers: any = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
   }
 
   constructor(
+    private errorResponse: ErrorResponseComponent,
     private httpClient: HttpClient,
     private logService: LogsService,
-  ) { }
-
-  private ErrorHandler(method: Function) {
-    try {
-      return method();
-    } catch (err: any) {
-      this.logService._(err.message, "error")
-      throw new HttpErrorResponse(err.message)
-    }
+    private auth: AuthService
+  ) {
+    this.headers['Authorization'] = 'Bearer ' + this.auth.getToken();
   }
 
   public GET(url: string): any {
-    const request = this.ErrorHandler(() => {
-      return this.httpClient.request('GET', url, {responseType:'json'}).subscribe((data) => {
-        return data;
-      });
-    });
-
-    this.logService._(request, "note");
-
-    return request;
+    try {
+      return this.httpClient.request('GET', url, {responseType: 'json', headers: this.headers})
+    } catch (err: any) {
+      this.logService._(err.message, "error")
+      this.errorResponse.show(err);
+      return err;
+    }
   }
 
   public POST(url: string, body: any): any {
-    const request = this.ErrorHandler(() => {
-      return this.httpClient.request('POST', url, {body: body, responseType: 'json', headers: this.headers}).subscribe((data) => {
-        return data;
-      });
-    });
-
-    return request;
+    try {
+      return this.httpClient.request('POST', url, {body: body, responseType: 'json', headers: this.headers})
+    } catch (err: any) {
+      this.logService._(err.message, "error")
+      this.errorResponse.show(err);
+      return err;
+    }
   }
 
   public PUT(url: string, body: any): any {
-    const request = this.ErrorHandler(() => {
-      return this.httpClient.request('PUT', url, {body: body, responseType: 'json', headers: this.headers}).subscribe((data) => {
-        return data;
-      });
-    });
-
-    return request;
+    try {
+      return this.httpClient.request('PUT', url, {body: body, responseType: 'json', headers: this.headers})
+    } catch (err: any) {
+      this.logService._(err.message, "error")
+      this.errorResponse.show(err);
+      return err;
+    }
   }
 
   public DELETE(url: string): any {
-    const request = this.ErrorHandler(() => {
-      return this.httpClient.request('DELETE', url, {responseType: 'json', headers: this.headers}).subscribe((data) => {
-        return data;
-      });
-    });
-
-    return request;
+    try {
+      return this.httpClient.request('DELETE', url, {responseType: 'json', headers: this.headers})
+    } catch (err: any) {
+      this.logService._(err.message, "error")
+      this.errorResponse.show(err);
+      return err;
+    }
   }
-
 }

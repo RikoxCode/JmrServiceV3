@@ -5,7 +5,6 @@ import {HeaderComponent} from "./shared/components/header/header.component";
 import {MatIcon} from "@angular/material/icon";
 import {FooterComponent} from "./shared/components/footer/footer.component";
 import {ErrorResponseComponent} from "./shared/components/feedback/error-response/error-response.component";
-import {GlobalErrorHandlingService} from "./shared/core/handling/global-error-handling.service";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +16,6 @@ import {GlobalErrorHandlingService} from "./shared/core/handling/global-error-ha
         FooterComponent,
         MatIcon,
         ErrorResponseComponent,
-        GlobalErrorHandlingService,
     ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
