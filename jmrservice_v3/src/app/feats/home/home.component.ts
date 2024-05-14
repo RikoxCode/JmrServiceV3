@@ -25,6 +25,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.isAdmin = this.authGuard.canShowToAdmin();
+    this.isAdmin = this.authGuard.canActivate();
   }
 }

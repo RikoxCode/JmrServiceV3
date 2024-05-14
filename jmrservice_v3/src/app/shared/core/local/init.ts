@@ -76,7 +76,6 @@ export class LocalInit{
 let localInit = new LocalInit()
 
 export function __(key: string){
-    console.log(localInit._(key));
     localInit.changeLocal('de-CH')
     return localInit._(key);
 }

@@ -11,6 +11,7 @@ import {PasswordResetComponent} from "./feats/auth/password-reset/password-reset
 import {TableComponent} from "./feats/archive/table/table.component";
 import {DemoComponent} from "./feats/archive/demo/demo.component";
 import {ProfileComponent} from "./feats/auth/profile/profile.component";
+import {FindFriendsComponent} from "./feats/users/find-friends/find-friends.component";
 
 export const routes: Routes = [
   {
@@ -33,6 +34,15 @@ export const routes: Routes = [
       {
         path: 'settings',
         component: SettingsComponent
+      }
+    ]
+  },
+  {
+    path: 'users',
+    children: [
+      {
+        path: 'find-friends',
+        component: FindFriendsComponent
       }
     ]
   },

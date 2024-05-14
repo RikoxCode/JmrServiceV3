@@ -21,10 +21,10 @@
         <span class="mx-4 font-medium">Dashboard</span>
       </a>
 
-      <a *ngIf="isLoggedIn" routerLink="accounts" (click)="setRouteActive('accounts')" [ngClass]="activatedRoute.accounts ? isActiveRoute : isNotActiveRoute">
+      <a *ngIf="isLoggedIn" routerLink="users/find-friends" (click)="setRouteActive('accounts')" [ngClass]="activatedRoute.accounts ? isActiveRoute : isNotActiveRoute">
         <mat-icon>group</mat-icon>
 
-        <span class="mx-4 font-medium">Accounts</span>
+        <span class="mx-4 font-medium">Find friends</span>
       </a>
 
       <a *ngIf="isLoggedIn" routerLink="tickets" (click)="setRouteActive('tickets')" [ngClass]="activatedRoute.tickets ? isActiveRoute : isNotActiveRoute">
