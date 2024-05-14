@@ -4,6 +4,7 @@ import {MatIcon} from "@angular/material/icon";
 import {CommonModule} from "@angular/common";
 import {AuthGuardService} from "../../core/auth/guards/auth.guard.service";
 import {OnInit} from '@angular/core';
+import {__} from "../../core/local/init";
 
 @Component({
   selector: 'app-footer',
@@ -26,4 +27,6 @@ export class FooterComponent implements OnInit{
   ngOnInit() {
     this.isLoggedIn = this.authGuard.canShowToUser();
   }
+
+    protected readonly __ = __;
 }

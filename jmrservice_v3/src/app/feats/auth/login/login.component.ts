@@ -7,7 +7,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {AuthService} from "../../../shared/core/auth/auth.service";
 import {ToastrService} from "ngx-toastr";
-import {HTTPError} from "../../../shared/core/error-types/httperror";
+import {__} from "../../../shared/core/local/init";
 
 @Component({
   selector: 'app-login',
@@ -56,4 +56,6 @@ export class LoginComponent {
         }
       });
   }
+
+  protected readonly __ = __;
 }
