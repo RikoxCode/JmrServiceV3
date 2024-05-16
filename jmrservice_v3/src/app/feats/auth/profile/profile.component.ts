@@ -5,6 +5,8 @@ import {environment} from "../../../../environments/environment";
 import {MatIcon} from "@angular/material/icon";
 import {RequesterService} from "../../../shared/core/http/requester.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {IUser} from "../../../shared/core/interfaces/user";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-profile',
@@ -30,6 +32,7 @@ export class ProfileComponent {
   constructor(
     public auth: AuthService,
     private requester: RequesterService,
+    private toastr: ToastrService
   ) { }
 
   protected readonly environment = environment;
@@ -39,11 +42,13 @@ export class ProfileComponent {
   }
 
   private async logoutRequest() {
+    this.toastr.success('You have been logged out');
+    this.auth.logout();
     await this.requester.POST(environment.apis.authAPI + '/logout', {}).subscribe((data: any = "") => {
-      this.auth.logout();
       window.location.href = '/';
     }, (err: any) => {
       console.log(err)
+      window.location.href = '/';
     });
   }
 }

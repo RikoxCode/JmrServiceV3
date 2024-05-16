@@ -44,4 +44,4 @@
   </div>
 </section>
 
-<app-toastr *ngIf="!isAdmin" msg="Go to log you into your accout!" icon="person" [btnConfig]="{ isShown: true, text: 'Go to Login', link: 'auth/login'}"></app-toastr>
+<app-toastr *ngIf="!isLogged" msg="Go to log you into your accout!" icon="person" [btnConfig]="{ isShown: true, text: 'Go to Login', link: 'auth/login'}"></app-toastr>

@@ -1,14 +1,19 @@
 import {Component, Injectable} from '@angular/core';
-import {User} from "../interfaces/user";
+import {CleanUser, IUser} from "../interfaces/user";
+import {ProfileComponent} from "../../../feats/auth/profile/profile.component";
+import {RequesterService} from "../http/requester.service";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-    private user: User | null = null;
+    private cleanUser!: CleanUser;
+    private user: IUser = {} as IUser;
 
     constructor() {
-      this.user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null;
+      this.cleanUser = new CleanUser();
+      this.user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : this.user = this.cleanUser.clean();
     }
 
     public setUser(token: string, user: any) {
@@ -18,16 +23,16 @@ export class AuthService {
         console.log(this.user);
     }
 
-    public getUser(): User {
-        return this.user || {} as User;
+    public getUser(): IUser {
+        return this.user || this.cleanUser.clean();
     }
 
     public getToken(): string {
-        return this.user != null ? this.user!.token : "";
+        return this.user.token !== "" ? this.user!.token : "";
     }
 
     public isAuthenticatedUser(): boolean {
-        return this.user !== null;
+        return this.user.token !== "";
         //return true;
     }
 
@@ -40,7 +45,7 @@ export class AuthService {
     }
 
     public logout() {
-        this.user = null;
+        this.user = this.cleanUser.clean();
         localStorage.removeItem('user');
     }
 }

@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
   id: number;
   name: string;
   slug: string;
@@ -13,4 +13,25 @@ export interface User {
   blocked_reason: string;
   created_at: string;
   updated_at: string;
+}
+
+export class CleanUser{
+  public clean(): IUser {
+    return {
+      id: 0,
+      name: "",
+      slug: "",
+      email: "",
+      nickname: "",
+      bio: "",
+      avatar: "",
+      permissions_level: 0,
+      token: "",
+      is_sys_admin: false,
+      is_blocked: false,
+      blocked_reason: "",
+      created_at: "",
+      updated_at: "",
+    };
+  }
 }

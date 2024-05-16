@@ -6,6 +6,10 @@ import {ErrorResponseComponent} from "./shared/components/feedback/error-respons
 import {provideToastr} from "ngx-toastr";
 import {provideAnimations} from "@angular/platform-browser/animations";
 import {LanguageService} from "./shared/core/local/language.service";
+import {ProfileComponent} from "./feats/auth/profile/profile.component";
+import {AuthService} from "./shared/core/auth/auth.service";
+import {RequesterService} from "./shared/core/http/requester.service";
+import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideToastr(),
     ErrorResponseComponent,
-    LanguageService
+    LanguageService,
   ]
 };

@@ -19,12 +19,14 @@ import {ToastrComponent} from "../../shared/components/feedback/toastr/toastr.co
 })
 export class HomeComponent implements OnInit {
   isAdmin: boolean = false;
+  isLogged: boolean = false;
 
   constructor(
     private authGuard: AuthGuardService
   ) { }
 
   ngOnInit() {
-    this.isAdmin = this.authGuard.canActivate();
+    this.isAdmin = this.authGuard.canShowToAdmin();
+    this.isLogged = this.authGuard.canShowToUser();
   }
 }
