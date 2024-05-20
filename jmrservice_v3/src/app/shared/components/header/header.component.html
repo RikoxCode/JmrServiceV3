@@ -61,7 +61,9 @@
 
     <a routerLink="account" class="flex items-center px-4 -mx-2" *ngIf="isLoggedIn">
       <img class="object-cover mx-2 rounded-full h-9 w-9" [src]="environment.apis.avatarAPI + auth.getUser().avatar || ''" alt="avatar" />
-      <span class="mx-2 font-medium text-gray-800 dark:text-gray-200">{{auth.getUser().name}}</span>
+      <span class="mx-2 font-medium text-gray-800 dark:text-gray-200">
+        <app-username></app-username>
+      </span>
     </a>
   </div>
 </aside>

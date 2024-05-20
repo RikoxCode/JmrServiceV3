@@ -1,0 +1,13 @@
+<div>
+  <h2 class="inline-block font-light md:mr-2 mb-2 sm:mb-0">
+    {{user.name}}</h2>
+
+  <!-- badge -->
+  @if (auth.isAdminUser()){
+    <span class="inline-block fas fa-certificate fa-lg text-blue-500
+                               relative mr-6 scale-75 transform -translate-y-1 -translate-x-3"
+          title="Admin">
+                            <mat-icon>admin_panel_settings</mat-icon>
+                        </span>
+  }
+</div>

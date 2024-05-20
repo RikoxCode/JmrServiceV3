@@ -6,6 +6,7 @@ import {RouterLink} from "@angular/router";
 import {AuthGuardService} from "../../core/auth/guards/auth.guard.service";
 import {AuthService} from "../../core/auth/auth.service";
 import {environment} from "../../../../environments/environment";
+import {UsernameComponent} from "../users/username/username.component";
 
 
 @Component({
@@ -14,7 +15,8 @@ import {environment} from "../../../../environments/environment";
   imports: [
     CommonModule,
     MatIconModule,
-    RouterLink
+    RouterLink,
+    UsernameComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
