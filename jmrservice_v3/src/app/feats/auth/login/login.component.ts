@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {AuthService} from "../../../shared/core/auth/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {__} from "../../../shared/core/local/init";
+import {LoaderComponent} from "../../../shared/components/feedback/loader/loader.component";
 
 @Component({
   selector: 'app-login',
@@ -15,12 +16,15 @@ import {__} from "../../../shared/core/local/init";
   imports: [
     HttpClientModule,
     FormsModule,
+    LoaderComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   providers: [LogsService, HttpClient, RequesterService]
 })
 export class LoginComponent {
+  public isLogin: boolean = false;
+
   constructor(
     private logger: LogsService,
     private requester: RequesterService,
@@ -32,6 +36,7 @@ export class LoginComponent {
 
   public async login(event: Event) {
     event.preventDefault();
+    this.isLogin = true;
 
     const email = (document.getElementById('email') as HTMLInputElement).value;
     const password = (document.getElementById('password') as HTMLInputElement).value;
@@ -45,6 +50,7 @@ export class LoginComponent {
         password
       }).subscribe((data: any = "") => {
         this.auth.setUser(data.token, data.user);
+        this.isLogin = false;
         this.toastr.success('Login successful', 'Login successful')
         window.location.href = '/';
       }, (err: any) => {
