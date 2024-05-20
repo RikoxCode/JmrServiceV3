@@ -21,6 +21,7 @@
         <span class="mx-4 font-medium">Dashboard</span>
       </a>
 
+      <!--
       <a *ngIf="isLoggedIn" routerLink="users/find-friends" (click)="setRouteActive('accounts')" [ngClass]="activatedRoute.accounts ? isActiveRoute : isNotActiveRoute">
         <mat-icon>group</mat-icon>
 
@@ -38,6 +39,7 @@
 
         <span class="mx-4 font-medium">Settings</span>
       </a>
+      -->
 
       <a *ngIf="isLoggedIn" routerLink="archive/table" (click)="setRouteActive('archive')" [ngClass]="activatedRoute.archive ? isActiveRoute : isNotActiveRoute">
         <mat-icon>inventory</mat-icon>

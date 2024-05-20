@@ -5,5 +5,7 @@ export const environment = {
     userAPI: 'http://alphaguard_alpha-version.test/api/v1/users',
     friendAPI: 'http://alphaguard_alpha-version.test/api/v1/friends',
     srcAPI: 'htt://alphaguard_alpha-version.test/src',
-  }
+    notemetaAPI: 'http://localhost:3000/api/notemeta/',
+  },
+  developerLogs: true,
 };

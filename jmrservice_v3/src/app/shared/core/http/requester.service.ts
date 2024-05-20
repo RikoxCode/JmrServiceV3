@@ -27,9 +27,10 @@ export class RequesterService {
 
   public GET(url: string): any {
     try {
-      return this.httpClient.request('GET', url, {responseType: 'json', headers: this.headers})
+      this.logService._("GET request to " + url, "info");
+      return this.httpClient.request('GET', url, {responseType: 'json', headers: this.headers});
     } catch (err: any) {
-      this.logService._(err.message, "error")
+      this.logService._(err.message, "error");
       this.errorResponse.show(err);
       return err;
     }
@@ -37,9 +38,10 @@ export class RequesterService {
 
   public POST(url: string, body: any): any {
     try {
-      return this.httpClient.request('POST', url, {body: body, responseType: 'json', headers: this.headers})
+      this.logService._("POST request to " + url, "info");
+      return this.httpClient.request('POST', url, {body: body, responseType: 'json', headers: this.headers});
     } catch (err: any) {
-      this.logService._(err.message, "error")
+      this.logService._(err.message, "error");
       this.errorResponse.show(err);
       return err;
     }
@@ -47,9 +49,10 @@ export class RequesterService {
 
   public PUT(url: string, body: any): any {
     try {
-      return this.httpClient.request('PUT', url, {body: body, responseType: 'json', headers: this.headers})
+      this.logService._("PUT request to " + url, "info");
+      return this.httpClient.request('PUT', url, {body: body, responseType: 'json', headers: this.headers});
     } catch (err: any) {
-      this.logService._(err.message, "error")
+      this.logService._(err.message, "error");
       this.errorResponse.show(err);
       return err;
     }
@@ -57,9 +60,10 @@ export class RequesterService {
 
   public DELETE(url: string): any {
     try {
-      return this.httpClient.request('DELETE', url, {responseType: 'json', headers: this.headers})
+      this.logService._("DELETE request to " + url, "info");
+      return this.httpClient.request('DELETE', url, {responseType: 'json', headers: this.headers});
     } catch (err: any) {
-      this.logService._(err.message, "error")
+      this.logService._(err.message, "error");
       this.errorResponse.show(err);
       return err;
     }

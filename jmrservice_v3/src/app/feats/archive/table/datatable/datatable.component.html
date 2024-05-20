@@ -19,12 +19,12 @@
       @for(row of data; track row){
         <tr class="hover:text-gray-200 hover:bg-gray-600/50">
           @for(col of visibleCols; track col){
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-6 py-4 whitespace-nowrap" [className]="row[col] === '' || row[col] === 'unknown' ? 'text-gray-600' : '' ">
               {{ row[col] }}
             </td>
           }
           @if (linkCol != null && hasKey(row, linkCol)){
-            <td><a [routerLink]="row[linkCol]" class="text-blue-600 underline underline-offset-2 cursor-pointer">visit</a></td>
+            <td><a [routerLink]="'inspect/' + row[linkCol]" class="text-blue-600 underline underline-offset-2 cursor-pointer">visit</a></td>
           }
         </tr>
       }

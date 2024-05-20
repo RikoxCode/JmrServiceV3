@@ -12,6 +12,7 @@ import {TableComponent} from "./feats/archive/table/table.component";
 import {DemoComponent} from "./feats/archive/demo/demo.component";
 import {ProfileComponent} from "./feats/auth/profile/profile.component";
 import {FindFriendsComponent} from "./feats/users/find-friends/find-friends.component";
+import {InspectComponent} from "./feats/archive/table/inspect/inspect.component";
 
 export const routes: Routes = [
   {
@@ -73,7 +74,16 @@ export const routes: Routes = [
       {
         path: 'table',
         canActivate: [AuthGuardService],
-        component: TableComponent
+        children: [
+          {
+            path: '',
+            component: TableComponent
+          },
+          {
+            path: 'inspect/:id',
+            component: InspectComponent
+          }
+        ]
       },
       {
         path: 'demo',
