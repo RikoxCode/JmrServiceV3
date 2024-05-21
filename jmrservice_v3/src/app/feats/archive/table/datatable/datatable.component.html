@@ -1,0 +1,32 @@
+<div class="overflow-x-auto">
+  <!-- Toolbar -->
+  <div>
+
+  </div>
+
+  <!-- Datatable -->
+  <table class="table">
+    <thead>
+      <tr>
+        @for(col of visibleCols; track col){
+          <th (click)="sort(col)" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            {{ col }}
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for(row of data; track row){
+        <tr class="hover:text-gray-200 hover:bg-gray-600/50">
+          @for(col of visibleCols; track col){
+            <td class="px-6 py-4 whitespace-nowrap" [className]="row[col] === '' || row[col] === 'unknown' ? 'text-gray-600' : '' ">
+              {{ row[col] }}
+            </td>
+          }
+          @if (linkCol != null && hasKey(row, linkCol)){
+            <td><a [routerLink]="'inspect/' + row[linkCol]" class="text-blue-600 underline underline-offset-2 cursor-pointer">visit</a></td>
+          }
+        </tr>
+      }
+  </table>
+</div>

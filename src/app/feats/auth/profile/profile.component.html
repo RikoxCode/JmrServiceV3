@@ -1,0 +1,112 @@
+<div class="">
+  <div class="flex w-full justify-end">
+    <a (click)="logout()" class="flex w-24 justify-between text-red-500 cursor-pointer">Logout <mat-icon>logout</mat-icon></a>
+  </div>
+  <div class="lg:w-8/12 lg:mx-auto mb-8">
+
+    <div class="flex flex-wrap items-center p-4 md:py-8">
+
+      <div class="md:w-3/12 md:ml-16">
+        <!-- profile image -->
+        <img class="w-20 h-20 md:w-40 md:h-40 object-cover rounded-full
+                     border-2 border-pink-600 p-1"
+             [src]="environment.apis.avatarAPI + auth.getUser().avatar || ''"
+             alt="profile">
+      </div>
+
+      <!-- divider -->
+      <div class="divider lg:divider-horizontal"></div>
+
+      <!-- profile meta -->
+      <div class="w-8/12 md:w-7/12 ml-4">
+        <div class="md:flex md:flex-wrap md:items-center mb-4">
+          <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
+            {{name}}                    </h2>
+
+          <!-- badge -->
+          @if (auth.isAdminUser()){
+            <span class="inline-block fas fa-certificate fa-lg text-blue-500
+                               relative mr-6 text-xl transform -translate-y-2 -translate-x-3"
+                  title="Admin">
+                            <mat-icon>admin_panel_settings</mat-icon>
+                        </span>
+          }
+
+          <!-- follow button -->
+          <a (click)="isEditing = true" class="text-gray-500 cursor-pointer">
+            <mat-icon>edit</mat-icon>
+          </a>
+        </div>
+
+        <!-- post, following, followers list for medium screens -->
+        <ul class="hidden md:flex space-x-8 mb-4">
+          <li>
+            <span class="font-semibold">136</span>
+            posts
+          </li>
+
+          <li>
+            <span class="font-semibold">40.5k</span>
+            followers
+          </li>
+          <li>
+            <span class="font-semibold">302</span>
+            following
+          </li>
+        </ul>
+
+        <!-- user meta form medium screens -->
+        <div class="hidden md:block">
+          <h1 class="font-semibold">{{nickname}}</h1>
+          <p>{{bio}}</p>
+        </div>
+
+      </div>
+
+      <!-- user meta form small screens -->
+      <div class="md:hidden text-sm my-2">
+        <h1 class="font-semibold">{{nickname}}</h1>
+        <span>Travel, Nature and Music</span>
+        <p>Lorem ipsum dolor sit amet consectetur</p>
+      </div>
+
+    </div>
+    @if (isEditing){
+
+      <div class="divider"></div>
+
+      <div class="mx-auto w-11/12 bg-gray-900 rounded-3xl">
+        <div class="flex justify-between items-center p-4">
+          <h2 class="text-2xl font-light">Edit Profile</h2>
+          <a (click)="isEditing = false" class="text-white cursor-pointer">
+            <mat-icon>close</mat-icon>
+          </a>
+        </div>
+
+        <div class="p-4">
+          <form>
+            <div class="mb-4">
+              <label for="name" class="block text-sm font-medium text-gray-500">Name</label>
+              <input (input)="isTextEditing = true" type="text" id="name" name="name" [value]="name" class="mt-1 block w-full rounded-md border-gray-800 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 bg-transparent">
+            </div>
+
+            <div class="mb-4">
+              <label for="nickname" class="block text-sm font-medium text-gray-500">Nickname</label>
+              <input (input)="isTextEditing = true" type="text" id="nickname" name="nickname" [value]="nickname" class="mt-1 block w-full rounded-md border-gray-800 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 bg-transparent">
+            </div>
+
+            <div class="mb-4">
+              <label for="bio" class="block text-sm font-medium text-gray-500">Bio</label>
+              <textarea (input)="isTextEditing = true" id="bio" name="bio" [value]="bio" class="mt-1 block
+                                w-full rounded-md border-gray-800 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 bg-transparent"></textarea>
+            </div>
+
+            <div class="mb-4">
+              <a class="btn btn-success" [hidden]="isTextEditing">Save</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    }
+  </div>
+</div>
