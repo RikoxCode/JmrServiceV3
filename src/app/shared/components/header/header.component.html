@@ -1,69 +1,81 @@
-<aside class="flex flex-col w-64 h-screen px-4 py-4 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
-  <!--<a href="#">
-    <img class="w-auto h-6 sm:h-7" src="https://merakiui.com/images/logo.svg" alt="">
-  </a>-->
+<button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+    <span class="sr-only">Open sidebar</span>
+    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+    </svg>
+</button>
 
-  <div class="relative mt-6">
-    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-      <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none">
-        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-    </span>
+<aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-900 border border-gray-800">
+        <ul class="space-y-2 font-medium">
+            <li>
+                <a routerLink="" (click)="setRouteActive('dashboard')"
+                   [ngClass]="activatedRoute.dashboard ? isActiveRoute : isNotActiveRoute">
+                    <mat-icon>home</mat-icon>
 
-    <input type="text" class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring" placeholder="Search" />
-  </div>
+                    <span class="mx-4 font-medium">Home</span>
+                </a>
+            </li>
 
-  <div class="flex flex-col justify-between flex-1 mt-6">
-    <nav>
-      <a routerLink="" (click)="setRouteActive('dashboard')" [ngClass]="activatedRoute.dashboard ? isActiveRoute : isNotActiveRoute">
-        <mat-icon>home</mat-icon>
+            <!--
+            <li>
+                <a *ngIf="isLoggedIn" routerLink="users/find-friends" (click)="setRouteActive('accounts')" [ngClass]="activatedRoute.accounts ? isActiveRoute : isNotActiveRoute">
+                  <mat-icon>group</mat-icon>
 
-        <span class="mx-4 font-medium">Dashboard</span>
-      </a>
+                  <span class="mx-4 font-medium">Find friends</span>
+                </a>
+            </li>
 
-      <!--
-      <a *ngIf="isLoggedIn" routerLink="users/find-friends" (click)="setRouteActive('accounts')" [ngClass]="activatedRoute.accounts ? isActiveRoute : isNotActiveRoute">
-        <mat-icon>group</mat-icon>
+            <li>
+                <a *ngIf="isLoggedIn" routerLink="tickets" (click)="setRouteActive('tickets')" [ngClass]="activatedRoute.tickets ? isActiveRoute : isNotActiveRoute">
+                  <mat-icon>confirmation_number</mat-icon>
 
-        <span class="mx-4 font-medium">Find friends</span>
-      </a>
+                  <span class="mx-4 font-medium">Tickets</span>
+                </a>
+            </li>
 
-      <a *ngIf="isLoggedIn" routerLink="tickets" (click)="setRouteActive('tickets')" [ngClass]="activatedRoute.tickets ? isActiveRoute : isNotActiveRoute">
-        <mat-icon>confirmation_number</mat-icon>
+            <li>
+                <a *ngIf="isLoggedIn" routerLink="settings" (click)="setRouteActive('settings')" [ngClass]="activatedRoute.settings ? isActiveRoute : isNotActiveRoute">
+                  <mat-icon>settings</mat-icon>
 
-        <span class="mx-4 font-medium">Tickets</span>
-      </a>
+                  <span class="mx-4 font-medium">Settings</span>
+                </a>
+            </li>
+            -->
 
-      <a *ngIf="isLoggedIn" routerLink="settings" (click)="setRouteActive('settings')" [ngClass]="activatedRoute.settings ? isActiveRoute : isNotActiveRoute">
-        <mat-icon>settings</mat-icon>
+            <li>
+                <a *ngIf="isLoggedIn" routerLink="archive/table" (click)="setRouteActive('archive')"
+                   [ngClass]="activatedRoute.archive ? isActiveRoute : isNotActiveRoute">
+                    <mat-icon>inventory</mat-icon>
 
-        <span class="mx-4 font-medium">Settings</span>
-      </a>
-      -->
+                    <span class="mx-4 font-medium">Archive</span>
+                </a>
+            </li>
 
-      <a *ngIf="isLoggedIn" routerLink="archive/table" (click)="setRouteActive('archive')" [ngClass]="activatedRoute.archive ? isActiveRoute : isNotActiveRoute">
-        <mat-icon>inventory</mat-icon>
+            <li>
+                <div *ngIf="isAdmin">
+                    <hr class="my-4 mt-16 border-gray-200 dark:border-gray-600"/>
 
-        <span class="mx-4 font-medium">Archive</span>
-      </a>
+                    <a routerLink="admin/dashboard" (click)="setRouteActive('admin_dashboard')"
+                       [ngClass]="activatedRoute.admin_dashboard ? isActiveRoute : isNotActiveRoute">
+                        <mat-icon>dashboard</mat-icon>
 
-      <div *ngIf="isAdmin">
-        <hr class="my-4 mt-16 border-gray-200 dark:border-gray-600" />
+                        <span class="mx-4 font-medium">Admin dashboard</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
 
-        <a routerLink="admin/dashboard" (click)="setRouteActive('admin_dashboard')" [ngClass]="activatedRoute.admin_dashboard ? isActiveRoute : isNotActiveRoute">
-          <mat-icon>dashboard</mat-icon>
-
-          <span class="mx-4 font-medium">Admin dashboard</span>
-        </a>
-      </div>
-
-    </nav>
-
-    <a routerLink="account" class="flex items-center px-4 -mx-2" *ngIf="isLoggedIn">
-      <img class="object-cover mx-2 rounded-full h-9 w-9" [src]="environment.apis.avatarAPI + auth.getUser().avatar || ''" alt="avatar" />
-      <span class="mx-2 font-medium text-gray-800 dark:text-gray-200">
-        <app-username></app-username>
-      </span>
-    </a>
-  </div>
+        <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700" *ngIf="isLoggedIn">
+            <li>
+                <a routerLink="account" class="flex items-center px-4 -mx-2">
+                    <img class="object-cover mx-2 rounded-full h-9 w-9"
+                         [src]="environment.apis.avatarAPI + auth.getUser().avatar || ''" alt="avatar"/>
+                    <span class="mx-2 font-medium text-gray-800 dark:text-gray-200">
+                    <app-username></app-username>
+                </span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </aside>
