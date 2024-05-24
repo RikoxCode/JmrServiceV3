@@ -1,11 +1,11 @@
 export const environment = {
   apis: {
-    authAPI: 'http://alphaguard_alpha-version.test/api/v1/auth',
-    avatarAPI: 'http://alphaguard_alpha-version.test/api/v1/users/',
-    userAPI: 'http://alphaguard_alpha-version.test/api/v1/users',
-    friendAPI: 'http://alphaguard_alpha-version.test/api/v1/friends',
-    srcAPI: 'htt://alphaguard_alpha-version.test/src',
-    notemetaAPI: 'http://localhost:3000/api/notemeta/',
+    authAPI: 'https://auth.netshlife.dev/api/v1/auth',
+    avatarAPI: 'https://auth.netshlife.dev/api/v1/users/',
+    userAPI: 'https://auth.netshlife.dev/api/v1/users',
+    friendAPI: 'https://auth.netshlife.dev/api/v1/friends',
+    srcAPI: 'https://auth.netshlife.dev/src',
+    notemetaAPI: 'https://metalink.netshlife.dev/api/notemeta/'
   },
   developerLogs: true,
 };
