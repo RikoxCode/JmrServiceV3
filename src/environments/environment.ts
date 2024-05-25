@@ -5,7 +5,7 @@ export const environment = {
     userAPI: 'https://auth.netshlife.dev/api/v1/users',
     friendAPI: 'https://auth.netshlife.dev/api/v1/friends',
     srcAPI: 'https://auth.netshlife.dev/src',
-    notemetaAPI: 'https://metalink.netshlife.dev/api/notemeta/'
+    notemetaAPI: 'https://metalink.netshlife.dev/api/v1/sheetmusics/'
   },
   developerLogs: true,
 };
