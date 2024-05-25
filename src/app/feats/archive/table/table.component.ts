@@ -42,7 +42,7 @@ export class TableComponent implements OnInit{
     this.isLoading = true;
     await this.requester.GET(environment.apis.notemetaAPI).subscribe((data: any = "") => {
       let result: Notemeta[] = [];
-      data.forEach((row: Notemeta) => {
+      data.data.forEach((row: Notemeta) => {
         row.arrangeur = row.arrangeur === "" ? "unknown" : row.arrangeur;
         row.komponist = row.komponist === "" ? "unknown" : row.komponist;
         row.duration = row.duration === "" ? "unknown" : row.duration;

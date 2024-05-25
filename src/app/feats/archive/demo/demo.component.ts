@@ -34,7 +34,7 @@ export class DemoComponent {
     this.isLoading = true;
     await this.requester.GET(environment.apis.notemetaAPI).subscribe((data: any = "") => {
       let result: Notemeta[] = [];
-      data.slice(0, 5).forEach((row: Notemeta) => {
+      data.data.slice(0, 5).forEach((row: Notemeta) => {
         row.arrangeur = row.arrangeur === "" ? "unknown" : row.arrangeur;
         row.komponist = row.komponist === "" ? "unknown" : row.komponist;
         row.duration = row.duration === "" ? "unknown" : row.duration;
