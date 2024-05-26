@@ -14,8 +14,8 @@
 </div>
 
 @if (!isLoading) {
-  <app-datatable [data]="tableData" [visibleCols]="['title', 'komponist', 'group', 'stil', 'grad']"
-                 [linkCol]="'_id'"></app-datatable>
+  <app-datatable [data]="tableData" [visibleCols]="['title', 'composer', 'arranger', 'style', 'grad']"
+                 [linkCol]="'slug'"></app-datatable>
 } @else {
   <app-loader type="bar"></app-loader>
 }
