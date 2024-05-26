@@ -35,8 +35,8 @@ export class DemoComponent {
     await this.requester.GET(environment.apis.notemetaAPI).subscribe((data: any = "") => {
       let result: Notemeta[] = [];
       data.data.slice(0, 5).forEach((row: Notemeta) => {
-        row.arrangeur = row.arrangeur === "" ? "unknown" : row.arrangeur;
-        row.komponist = row.komponist === "" ? "unknown" : row.komponist;
+        row.arranger = row.arranger === "" ? "unknown" : row.arranger;
+        row.composer = row.composer === "" ? "unknown" : row.composer;
         row.duration = row.duration === "" ? "unknown" : row.duration;
         result.push(row);
         console.log(row);

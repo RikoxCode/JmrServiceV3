@@ -28,17 +28,17 @@
 
             <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Komponist</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.komponist }}</span>
+              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.composer }}</span>
             </div>
 
             <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Arrangeur</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.arrangeur }}</span>
+              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.arranger }}</span>
             </div>
 
             <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Verlag</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.verlag }}</span>
+              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.publisher }}</span>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
 
             <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Stil</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.stil }}</span>
+              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.style }}</span>
             </div>
 
             <div class="flex items-center mt-2">
@@ -61,7 +61,7 @@
 
             <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Archive ID</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta._archiveplace }}</span>
+              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.archive_id }}</span>
             </div>
 
             <div class="flex items-center mt-2">
@@ -94,7 +94,7 @@
 
             <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Zustand</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.digital_analog }}</span>
+              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.is_digital }}</span>
             </div>
           </div>
         </div>
@@ -108,23 +108,8 @@
             <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Meta Information</h2>
 
             <div class="flex items-center mt-2">
-              <span class="text-sm text-gray-500 dark:text-gray-400">Gespielt von</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.group }}</span>
-            </div>
-
-            <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Demo URL</span>
               <a class="text-sm text-blue-600 hover:border hover:border-b-2 hover:border-blue-600 ml-2" target="_blank" [href]="notemeta.demo_url">{{ notemeta.demo_url }}</a>
-            </div>
-
-            <div class="flex items-center mt-2">
-              <span class="text-sm text-gray-500 dark:text-gray-400">Aufname</span>
-              <a class="text-sm text-blue-500 cursor-pointer hover:border-b-2 hover:border-blue-500 ml-2" target="_blank" [href]="notemeta.aufnahme_url">{{ notemeta.aufnahme_url }}</a>
-            </div>
-
-            <div class="flex items-center mt-2">
-              <span class="text-sm text-gray-500 dark:text-gray-400">JMR Aufnahme</span>
-              <a class="text-sm text-blue-600 hover:border hover:border-b-2 hover:border-blue-600 ml-2" target="_blank" [href]="notemeta.jmr_aufnahme_url">{{ notemeta.jmr_aufnahme_url }}</a>
             </div>
           </div>
         </div>

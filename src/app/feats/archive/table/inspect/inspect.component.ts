@@ -20,7 +20,6 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class InspectComponent {
   public notemeta: any = {};
-  public average: any = {};
   public isLoading: boolean = true;
 
   constructor(
@@ -32,12 +31,11 @@ export class InspectComponent {
     });
   }
 
-  getNotemeta(id: string) {
+  getNotemeta(slug: string) {
     try {
       this.isLoading = true;
-      this.requester.GET(environment.apis.notemetaAPI + id).subscribe((data: any = "") => {
-        this.notemeta = data.notemeta;
-        this.average = data.average;
+      this.requester.GET(environment.apis.notemetaAPI + slug).subscribe((data: any = "") => {
+        this.notemeta = data;
         this.isLoading = false;
       });
     } catch (error) {
