@@ -60,6 +60,7 @@ export class LoginComponent {
         } else {
           this.toastr.error(err.error.message, 'Login failed')
         }
+        this.isLogin = false;
       });
   }
 
