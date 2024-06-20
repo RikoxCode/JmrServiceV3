@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {RequesterService} from "../../../../shared/core/http/requester.service";
 import {environment} from "../../../../../environments/environment";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {LoaderComponent} from "../../../../shared/components/feedback/loader/loader.component";
 import {MatIcon} from "@angular/material/icon";
@@ -12,7 +12,8 @@ import {MatIcon} from "@angular/material/icon";
   imports: [
     HttpClientModule,
     LoaderComponent,
-    MatIcon
+    MatIcon,
+    RouterLink
   ],
   templateUrl: './inspect.component.html',
   styleUrl: './inspect.component.scss',
@@ -35,7 +36,7 @@ export class InspectComponent {
     try {
       this.isLoading = true;
       this.requester.GET(environment.apis.notemetaAPI + slug).subscribe((data: any = "") => {
-        this.notemeta = data;
+        this.notemeta = data.data;
         this.isLoading = false;
       });
     } catch (error) {
@@ -48,4 +49,8 @@ export class InspectComponent {
   }
 
   protected readonly window = window;
+
+  deleteNote() {
+
+  }
 }
