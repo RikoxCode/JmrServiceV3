@@ -47,7 +47,6 @@ export class TableComponent implements OnInit{
         row.composer = row.composer === "" ? "unknown" : row.composer;
         row.duration = row.duration === "" ? "unknown" : row.duration;
         result.push(row);
-        console.log(row);
       });
       this.tableData = result;
       this.isLoading = false;

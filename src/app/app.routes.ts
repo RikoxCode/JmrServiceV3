@@ -13,6 +13,7 @@ import {DemoComponent} from "./feats/archive/demo/demo.component";
 import {ProfileComponent} from "./feats/auth/profile/profile.component";
 import {FindFriendsComponent} from "./feats/users/find-friends/find-friends.component";
 import {InspectComponent} from "./feats/archive/table/inspect/inspect.component";
+import {EditComponent} from "./feats/archive/table/inspect/edit/edit.component";
 
 export const routes: Routes = [
   {
@@ -80,8 +81,18 @@ export const routes: Routes = [
             component: TableComponent
           },
           {
-            path: 'inspect/:id',
-            component: InspectComponent
+            path: 'inspect',
+            children: [
+              {
+                path: ':id',
+                component: InspectComponent,
+                pathMatch: 'full'
+              },
+              {
+                path: 'edit/:id',
+                component: EditComponent
+              }
+            ]
           }
         ]
       },
