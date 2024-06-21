@@ -91,12 +91,14 @@ export const routes: Routes = [
               },
               {
                 path: 'edit/:id',
+                canActivate: [AuthGuardService],
                 component: EditComponent
               }
             ]
           },
           {
             path: 'create',
+            canActivate: [AuthGuardService],
             component: CreateComponent
           }
         ]
