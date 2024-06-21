@@ -14,6 +14,8 @@ import {ProfileComponent} from "./feats/auth/profile/profile.component";
 import {FindFriendsComponent} from "./feats/users/find-friends/find-friends.component";
 import {InspectComponent} from "./feats/archive/table/inspect/inspect.component";
 import {EditComponent} from "./feats/archive/table/inspect/edit/edit.component";
+import {CreateComponent} from "./feats/archive/table/create/create.component";
+import {AdminGuard} from "./shared/core/auth/guards/admin.guard";
 
 export const routes: Routes = [
   {
@@ -90,15 +92,26 @@ export const routes: Routes = [
               },
               {
                 path: 'edit/:id',
+                canActivate: [AdminGuard],
                 component: EditComponent
               }
             ]
+          },
+          {
+            path: 'create',
+            canActivate: [AdminGuard],
+            component: CreateComponent
           }
         ]
       },
       {
         path: 'demo',
         component: DemoComponent
+      },
+      {
+        path: '',
+        redirectTo: 'table',
+        pathMatch: 'full'
       }
     ]
   },

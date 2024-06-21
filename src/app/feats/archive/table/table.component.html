@@ -1,20 +1,45 @@
-<div class="flex ml-4 mb-10">
+<div class="flex ml-4 mb-10 justify-between align-middle">
   <div>
     <p class="text-xl font-bold">Archive table</p>
-    <p class="text-sm text-gray-500">Please remember that this site works with real productive data and no intentional errors will be tolerated.</p>
-    <p class="text-sm text-gray-500">The data is fetched from a public API and is stored in the database.</p>
   </div>
 
-  <div class="ml-6 mt-6">
-    <button class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="getTableData()">
-      Refetch data
+  <div class="scale-150">
+    <a class="hover:cursor-pointer text-gray-500 mr-2"
+       (click)="getTableData()">
       <mat-icon class="ml-1">sync</mat-icon>
-    </button>
+    </a>
+    @if (adminGuard.canActivate()) {
+      <a class="hover:cursor-pointer text-gray-500"
+         routerLink="/archive/table/create">
+        <mat-icon>add</mat-icon>
+      </a>
+    }
+  </div>
+</div>
+<div class="w-full flex ml-4 mb-2 justify-end">
+  <div class="w-4/12">
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+             fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+      </div>
+      <input type="search" id="default-search"
+             class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+             placeholder="Search Musics" (change)="searchTableData($event)"/>
+      <button
+        class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Search
+      </button>
+    </div>
   </div>
 </div>
 
 @if (!isLoading) {
-  <app-datatable [data]="tableData" [visibleCols]="['title', 'composer', 'arranger', 'style', 'grad']"
+  <app-datatable [data]="tableData" [visibleCols]="['title', 'composer', 'arranger', 'publisher', 'style', 'grad']"
                  [linkCol]="'slug'"></app-datatable>
 } @else {
   <app-loader type="bar"></app-loader>

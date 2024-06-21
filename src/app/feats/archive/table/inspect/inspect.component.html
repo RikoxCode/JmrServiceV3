@@ -1,17 +1,37 @@
 @if (!isLoading) {
   <div>
     <div class="flex justify-between">
-      <div class="flex text-xl text-gray-500 cursor-pointer hover:text-gray-400 w-fit" (click)="window.history.back()"><mat-icon class="mt-1">arrow_back_ios</mat-icon> Go back</div>
-
-      <div>
-        <a class="btn btn-primary" [routerLink]="['/archive', 'table', 'inspect', 'edit', notemeta.slug]">Edit</a>
-        <a class="btn btn-danger" (click)="deleteNote()">Delete</a>
+      <div class="flex text-xl text-gray-500 cursor-pointer hover:text-gray-400 w-fit"
+           (click)="window.history.back()">
+        <mat-icon class="mt-1">arrow_back_ios</mat-icon>
+        Go back
       </div>
+
+      @if (adminGuard.canActivate()) {
+        <div>
+          <a class="hover:cursor-pointer text-gray-500 mr-3"
+             [routerLink]="['/archive', 'table', 'inspect', 'edit', notemeta.slug]">
+            <mat-icon>edit</mat-icon>
+          </a>
+
+          <button class="hover:cursor-pointer text-gray-500" onclick="my_modal_4.showModal()">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <dialog id="my_modal_4" class="modal">
+            <div class="modal-box w-2/6 max-w-5xl">
+              <h3 class="font-bold text-lg text-red-500">Deletion detected</h3>
+              <p class="py-4">Are you sure to delete the notemeta?</p>
+              <div class="modal-action">
+                <form method="dialog">
+                  <button class="btn btn-error mr-3" (click)="deleteNote()">Delete</button>
+                  <button class="btn">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
+        </div>
+      }
     </div>
-    <span
-      class="absolute mx-auto py-4 flex border w-fit bg-gradient-to-r blur-xl from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-6xl box-content font-extrabold text-transparent text-center select-none">
-      {{ notemeta.title }}
-    </span>
     <h1
       class="relative top-0 w-fit h-auto py-4 justify-center flex bg-gradient-to-r items-center from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-6xl font-extrabold text-transparent text-center select-auto">
       {{ notemeta.title }}
@@ -91,24 +111,27 @@
 
             <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Created on</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ getFormatedDate(notemeta.created_at) }}</span>
+              <span
+                class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ getFormatedDate(notemeta.created_at) }}</span>
             </div>
 
             <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Last updated</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ getFormatedDate(notemeta.updated_at) }}</span>
+              <span
+                class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ getFormatedDate(notemeta.updated_at) }}</span>
             </div>
 
             <div class="flex items-center mt-2">
               <span class="text-sm text-gray-500 dark:text-gray-400">Zustand</span>
-              <span class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.is_digital ? "Digital" : "Analog" }}</span>
+              <span
+                class="text-sm text-gray-800 dark:text-gray-200 ml-2">{{ notemeta.is_digital ? "Digital" : "Analog" }}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div>
-      @if (notemeta.demo_url){
+      @if (notemeta.demo_url) {
         <div
           class="bg-white mt-4 w-full rounded-md border border-gray-100 p-6 shadow-md shadow-black/5 dark:bg-gray-600 dark:border-gray-800">
           <div class="flex justify-between mb-6">
@@ -117,7 +140,9 @@
 
               <div class="flex items-center mt-2">
                 <span class="text-sm text-gray-500 dark:text-gray-400">Demo URL</span>
-                <a class="text-sm text-blue-600 hover:border-b-2 hover:border-blue-600 ml-2 dark:text-blue-400 dark:hover:border-blue-400" target="_blank" [href]="notemeta.demo_url">{{ notemeta.demo_url }}</a>
+                <a
+                  class="text-sm text-blue-600 hover:border-b-2 hover:border-blue-600 ml-2 dark:text-blue-400 dark:hover:border-blue-400"
+                  target="_blank" [href]="notemeta.demo_url">{{ notemeta.demo_url }}</a>
               </div>
             </div>
           </div>
