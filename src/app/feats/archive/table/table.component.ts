@@ -7,6 +7,7 @@ import {Notemeta} from "../../../shared/core/interfaces/notemeta";
 import {DatatableComponent} from "./datatable/datatable.component";
 import {LoaderComponent} from "../../../shared/components/feedback/loader/loader.component";
 import {MatIcon} from "@angular/material/icon";
+import {AdminGuard} from "../../../shared/core/auth/guards/admin.guard";
 
 @Component({
     selector: 'app-table',
@@ -30,7 +31,8 @@ export class TableComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private requester: RequesterService
+        private requester: RequesterService,
+        public adminGuard: AdminGuard
     ) {
     }
 

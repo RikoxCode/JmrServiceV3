@@ -6,6 +6,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {LoaderComponent} from "../../../../shared/components/feedback/loader/loader.component";
 import {MatIcon} from "@angular/material/icon";
 import {ToastrService} from "ngx-toastr";
+import {AdminGuard} from "../../../../shared/core/auth/guards/admin.guard";
 
 @Component({
   selector: 'app-inspect',
@@ -27,7 +28,8 @@ export class InspectComponent {
   constructor(
     private requester: RequesterService,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public adminGuard: AdminGuard
   ) {
     this.route.params.subscribe(params => {
       this.getNotemeta(params['id'])

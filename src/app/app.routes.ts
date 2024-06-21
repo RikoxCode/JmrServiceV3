@@ -15,6 +15,7 @@ import {FindFriendsComponent} from "./feats/users/find-friends/find-friends.comp
 import {InspectComponent} from "./feats/archive/table/inspect/inspect.component";
 import {EditComponent} from "./feats/archive/table/inspect/edit/edit.component";
 import {CreateComponent} from "./feats/archive/table/create/create.component";
+import {AdminGuard} from "./shared/core/auth/guards/admin.guard";
 
 export const routes: Routes = [
   {
@@ -91,14 +92,14 @@ export const routes: Routes = [
               },
               {
                 path: 'edit/:id',
-                canActivate: [AuthGuardService],
+                canActivate: [AdminGuard],
                 component: EditComponent
               }
             ]
           },
           {
             path: 'create',
-            canActivate: [AuthGuardService],
+            canActivate: [AdminGuard],
             component: CreateComponent
           }
         ]
