@@ -10,19 +10,21 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanDeactivate<
   constructor(private authService: AuthService, private router: Router) { }
 
   canShowToAdmin(): boolean {
-    if (this.authService.isAdminUser()) {
-      return true;
+    if(this.authService.isAuthenticatedUser()){
+      if (this.authService.isAdminUser()) {
+        return true;
+      }
+      return false;
     }
     return false;
-
   }
 
   canActivate(): boolean {
-    return this.canShowToAdmin();
+    return this.checkAuth();
   }
 
   canActivateChild(): boolean {
-    return this.canShowToAdmin();
+    return this.checkAuth();
   }
 
   canDeactivate(component: DashboardComponent): boolean {
@@ -30,6 +32,16 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanDeactivate<
   }
 
   canLoad(): boolean {
-    return this.canShowToAdmin();
+    return this.checkAuth();
+  }
+
+  private checkAuth(): boolean {
+    if (this.canShowToAdmin()) {
+      return true;
+    } else {
+      // Redirect to the login page if the user is not authenticated
+      this.router.navigate(['/not-authorized']);
+      return false;
+    }
   }
 }
