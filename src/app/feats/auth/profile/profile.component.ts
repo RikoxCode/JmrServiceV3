@@ -25,6 +25,7 @@ export class ProfileComponent {
   nickname = this.auth.getUser().nickname;
   email = this.auth.getUser().email;
   bio = this.auth.getUser().bio;
+  avatar = this.auth.getUser().avatar;
 
   isEditing: boolean = false;
   isTextEditing: boolean = false;

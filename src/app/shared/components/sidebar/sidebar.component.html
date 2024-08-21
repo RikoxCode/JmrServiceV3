@@ -15,12 +15,9 @@
     <ul class="space-y-2 font-medium">
       @for (route of activatedRoute; track route.url) {
 
-        @if (route.hasSeperator) {
-          <hr class="my-4 mt-16 border-gray-200 dark:border-gray-600"/>
-        }
         <li>
           @if (!route.isHidden) {
-            @if (route.url === 'account') {
+            @if (route.url === 'account' && isLoggedIn) {
 
               <div>
                 <a routerLink="{{ route.url }}" (click)="setRouteActive(route.url)" [ngClass]="getClassAssets(route)">
@@ -35,6 +32,11 @@
             } @else if (route.canShowTo.admin) {
 
               @if (isAdmin) {
+
+                @if (route.hasSeperator) {
+                  <hr class="my-4 mt-16 border-gray-200 dark:border-gray-600"/>
+                }
+
                 <div>
                   <a routerLink="{{ route.url }}" (click)="setRouteActive(route.url)"
                      [ngClass]="getClassAssets(route)">
@@ -48,6 +50,11 @@
             } @else if (route.canShowTo.loggedUser) {
 
               @if (isLoggedIn) {
+
+                @if (route.hasSeperator) {
+                  <hr class="my-4 mt-16 border-gray-200 dark:border-gray-600"/>
+                }
+
                 <div>
                   <a routerLink="{{ route.url }}" (click)="setRouteActive(route.url)"
                      [ngClass]="getClassAssets(route)">
@@ -60,6 +67,10 @@
 
             } @else {
 
+              @if (route.hasSeperator) {
+                <hr class="my-4 mt-16 border-gray-200 dark:border-gray-600"/>
+              }
+
               <div>
                 <a routerLink="{{ route.url }}" (click)="setRouteActive(route.url)"
                    [ngClass]="getClassAssets(route)">
@@ -70,7 +81,6 @@
               </div>
 
             }
-
           }
         </li>
 

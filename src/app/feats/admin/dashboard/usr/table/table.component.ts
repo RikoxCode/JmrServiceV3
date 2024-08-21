@@ -1,41 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {RequesterService} from "../../../shared/core/http/requester.service";
-import {environment} from "../../../../environments/environment";
-import {IUser} from "../../../shared/core/interfaces/user";
+import {environment} from "../../../../../../environments/environment";
+import {RequesterService} from "../../../../../shared/core/http/requester.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {LoaderComponent} from "../../../shared/components/feedback/loader/loader.component";
-import {DatatableComponent} from "../../archive/table/datatable/datatable.component";
-import {TableComponent} from "./usr/table/table.component";
+import {IUser} from "../../../../../shared/core/interfaces/user";
+import {AuthService} from "../../../../../shared/core/auth/auth.service";
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-table',
   standalone: true,
   imports: [
-    HttpClientModule,
-    LoaderComponent,
-    DatatableComponent,
-    TableComponent
+    HttpClientModule
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  templateUrl: './table.component.html',
+  styleUrl: './table.component.scss',
   providers: [RequesterService, HttpClient]
 })
-export class DashboardComponent implements OnInit {
+export class TableComponent implements OnInit {
   public users: IUser[] = [];
-  public columns: string[] = [
-    'id',
-    'name',
-    'email',
-    'nickname',
-    'bio',
-    'created_at',
-  ];
-
 
   public isLoading: boolean = true;
 
   constructor(
-    private readonly requester: RequesterService
+    private readonly requester: RequesterService,
+    public readonly auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -60,4 +47,6 @@ export class DashboardComponent implements OnInit {
       console.log(err)
     });
   }
+
+  protected readonly environment = environment;
 }
