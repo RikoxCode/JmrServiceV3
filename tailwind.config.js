@@ -4,6 +4,7 @@ module.exports = {
   content: [
     "./src/**/*.{html,js,ts}",
     "./node_modules/flowbite/**/*.js",
+    "./node_modules/tw-elements/js/**/*.js"
   ],
   theme: {
     extend: {},
@@ -12,6 +13,7 @@ module.exports = {
     require('flowbite/plugin')({
       datatables: true,
     }),
+    require("tw-elements/plugin.cjs"),
     require('daisyui')
   ],
 }

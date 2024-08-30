@@ -21,7 +21,7 @@
 
               <div>
                 <a routerLink="{{ route.url }}" (click)="setRouteActive(route.url)" [ngClass]="getClassAssets(route)">
-                  <img class="object-cover mx-2 rounded-full h-9 w-9"
+                  <img class="object-cover rounded-full h-9 w-9"
                        [src]="environment.apis.avatarAPI + auth.getUser().avatar || ''" alt="avatar"/>
                   <span class="mx-2 font-medium text-gray-800 dark:text-gray-200">
                     <app-username></app-username>
